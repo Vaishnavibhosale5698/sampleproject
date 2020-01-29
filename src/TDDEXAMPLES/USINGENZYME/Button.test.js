@@ -14,7 +14,7 @@
 
 import React from 'react';
 import {shallow} from 'enzyme';
-import setup from '../jest/setup'
+import setup from '../../../jest/setup'
 import Button from './Button';
 
 describe('Button', () => {
