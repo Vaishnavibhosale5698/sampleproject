@@ -293,25 +293,79 @@
 //   }
 // }
 
-import React, { Component } from 'react'
-import {View} from 'react-native'
-import Button from './src/TDDEXAMPLES/USINGENZYME/Button'
-import HooksWithManyStates from './src/HooksEXAMPLE/HooksWithManyStates'
-import TODOApp from './src/HooksEXAMPLE/TODOApp'
-import WriteFile from './src/FileSystemExamples/WriteFile'
+// import React, { Component } from 'react'
+// import {View} from 'react-native'
+// import Button from './src/TDDEXAMPLES/USINGENZYME/Button'
+// import HooksWithManyStates from './src/HooksEXAMPLE/HooksWithManyStates'
+// import TODOApp from './src/HooksEXAMPLE/TODOApp'
+// import WriteFile from './src/FileSystemExamples/WriteFile'
+// import Button1 from './src/TDDEXAMPLES/USINGENZYME/Button1'
 
-class App extends Component {
+// class App extends Component {
+//   render() {
+//     return (
+//       // <View>
+//       //   {/* <Button/> */}
+//       //   <HooksWithManyStates/>
+//       // </View>
+//       //<TODOApp/>
+//       //<WriteFile/>
+//       <Button1/>
+//     )
+//   }
+// }
+
+// export default App
+
+// import React, { Component } from 'react'
+// import {View} from 'react-native'
+// import TextFeildTesting from './src/TDDEXAMPLES/USINGENZYME/TextFeildTesting'
+
+// class App extends Component {
+//   render() {
+//     return (
+//       <View>
+//         <TextFeildTesting/>
+//       </View>
+//     )
+//   }
+// }
+
+// export default App
+
+
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+
+import SearchBar from './src/ReduxExample/SearchBar';
+import SearchResults from './src/ReduxExample/SearchResults';
+
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+import rootReducer from './src/ReduxExample/reducers_index';
+
+const store = createStore(rootReducer);
+store.subscribe(() => console.log('store', store.getState()));
+
+export default class App extends React.Component {
   render() {
     return (
-      // <View>
-      //   {/* <Button/> */}
-      //   <HooksWithManyStates/>
-      // </View>
-      //<TODOApp/>
-      <WriteFile/>
-    )
+      <Provider store={store}>
+        <View style={styles.container}>
+          <SearchBar/>
+          <SearchResults/>
+        </View>
+      </Provider>
+    );
   }
 }
 
-export default App
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 
