@@ -17,16 +17,16 @@ export default class SearchBar extends Component {
    // const API_KEY = 'AIzaSyAmNyvs8jevFpw-oVQAXU8pfDWrAPtXnuU';
    // const apiURL = 'https://cse.google.com/cse'
    //let URL = apiURL + '?key=' + API_KEY + '&cx=009756966931823328897:zuvfpkf0pkd' + '&q=' + this.state.searchTerm;
-   let URL = 'https://cse.google.com/cse?cx=009756966931823328897:zuvfpkf0pkd'
+   let URL = 'https://cse.google.com/cse?cx=009756966931823328897:zuvfpkf0pkd' + '&q=' + this.state.searchTerm;
    console.log(URL);
     fetch(URL, {
       method: 'GET',
       headers:{
-       'Accept': 'application/json',
-        'Content-Type': 'application/json',
+       //'Accept': 'application/json',
+        'Content-Type': 'text/html',
       }
     }).then((response) => {
-        console.log('data',response)
+        //console.log('data',JSON.stringify(response))
       response.json().then((data) => {
         this.props.searchResults(data.items);
       })

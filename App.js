@@ -334,38 +334,157 @@
 // export default App
 
 
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+// import React from 'react';
+// import { StyleSheet, Text, View } from 'react-native';
 
-import SearchBar from './src/ReduxExample/SearchBar';
-import SearchResults from './src/ReduxExample/SearchResults';
+// import SearchBar from './src/ReduxExample/SearchBar';
+// import SearchResults from './src/ReduxExample/SearchResults';
 
-import {createStore} from 'redux';
-import {Provider} from 'react-redux';
-import rootReducer from './src/ReduxExample/reducers_index';
+// import {createStore} from 'redux';
+// import {Provider} from 'react-redux';
+// import rootReducer from './src/ReduxExample/reducers_index';
 
-const store = createStore(rootReducer);
-store.subscribe(() => console.log('store', store.getState()));
+// const store = createStore(rootReducer);
+// store.subscribe(() => console.log('store', store.getState()));
 
-export default class App extends React.Component {
+// export default class App extends React.Component {
+//   render() {
+//     return (
+//       <Provider store={store}>
+//         <View style={styles.container}>
+//           <SearchBar/>
+//           <SearchResults/>
+//         </View>
+//       </Provider>
+//     );
+//   }
+// }
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#fff',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
+// });
+
+// import React, { Component } from 'react';
+// import {View, Text, TextInput, Button} from 'react-native'
+// // import { Provider} from 'react-redux';
+// import { connect } from 'react-redux';
+// // import configureStore from './src/store/configureStore';
+// import * as contactAction from './src/actions/contactAction';
+
+// // const store = configureStore();
+
+// class App extends Component {
+
+//   constructor(props){
+//     super(props);
+//     this.handleChange = this.handleChange.bind(this);
+//     this.handleSubmit = this.handleSubmit.bind(this);
+//     this.state = {
+//       name: ''
+//     }
+//   }
+
+//   handleChange(e){
+//     this.setState({
+//       name: e
+//     })
+//   }
+
+//   handleSubmit(e){
+//     e.preventDefault();
+//     let contact = {
+//       name: this.state.name
+//     }
+//     this.props.createContact(contact);
+//   }
+
+//   render() {
+//     let name;
+//     return(
+//       // <Provider store={store}>
+//       <View>
+//         <Text>Clientside Contacts Application</Text>
+//         { 
+//         <View>
+//           {this.props.contacts.map((contact, i) => <li key={i}>{contact.name}</li> )}
+//         </View> 
+//         }
+//         <View>
+//           <Text>Add Contact Form</Text>
+//           <View>
+//             <TextInput 
+//             //type="text" 
+//             onChangeText={(e) => this.handleChange(e)} />
+//             <Button 
+//             title="submit" 
+//             onPress = {(e) => this.handleSubmit(e)}/>
+//           </View>
+//         </View>
+//       </View>
+//       // </Provider>
+//     )
+//   }
+// }
+
+// const mapStateToProps = (state, ownProps) => {
+//   return {
+//     contacts: state.contacts
+//   }
+// };
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     createContact: contact => dispatch(contactAction.createContact(contact))
+//   }
+// };
+
+// //export default connect(App)(mapStateToProps, mapDispatchToProps);
+
+// export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+// import React, { Component } from 'react'
+// import { Provider } from 'react-redux';
+// import configureStore from './src/store/configureStore';
+// import ContactList from './src/ContactList';
+
+// const store = configureStore();
+
+// class App extends Component {
+//   render() {
+//     return (
+//       <Provider store={store}>
+//          <ContactList/>
+//       </Provider>
+//     )
+//   }
+// }
+
+// export default App
+
+import React, { Component } from 'react'
+import { View, Button } from 'react-native'
+import ToastExample from '../sampleproject/src/ToastExample';
+
+class App extends Component {
+
+  showToast = () =>{
+    ToastExample.show('Awesome', ToastExample.SHORT);
+  }
   render() {
     return (
-      <Provider store={store}>
-        <View style={styles.container}>
-          <SearchBar/>
-          <SearchResults/>
-        </View>
-      </Provider>
-    );
+      <View>
+        <Button
+        title = 'Toast Message'
+        onPress = {this.showToast}/>
+      </View>
+    )
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App
 
