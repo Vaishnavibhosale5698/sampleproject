@@ -467,24 +467,85 @@
 // export default App
 
 import React, { Component } from 'react'
-import { View, Button } from 'react-native'
-import ToastExample from '../sampleproject/src/ToastExample';
+import { View, Button,ScrollView,Image} from 'react-native'
+//import ToastExample from '../sampleproject/src/ToastExample';
+import RNFetchBlob from 'react-native-fetch-blob'
+import * as RNFS from 'react-native-fs'
+//import GoogleMap from './src/GioFence'
+//import CameraRoll from "@react-native-community/cameraroll"
 
 class App extends Component {
 
-  showToast = () =>{
-    ToastExample.show('Awesome', ToastExample.SHORT);
+  constructor(props){
+    super(props)  
   }
-  render() {
+
+  showToast = () =>{
+    //ToastExample.show('Awesome', ToastExample.SHORT);
+   var path = RNFS.ExternalStorageDirectoryPath+'AA'
+    RNFetchBlob.fs.mkdir(path).then( ()=>{
+      console.log('file created ')
+    }).catch((error)=>{
+      console.log(error)
+    }
+    )
+
+    // RNFS.touch(RNFS.ExternalStorageDirectoryPath).then(()=>{
+    //   console.log('touch')
+    // }).catch(()=>{
+    //   console.log('wertyuioijhbvcsdvb')
+    // })
+    const dirs = RNFetchBlob.fs.dirs
+console.log(dirs.DocumentDir)
+console.log(dirs.CacheDir)
+console.log(dirs.DCIMDir)
+console.log(dirs.DownloadDir)
+
+const fs = RNFetchBlob.fs
+const NEW_FILE_PATH = dirs.DCIMDir
+const base64 = RNFetchBlob.base64
+fs.writeFile(NEW_FILE_PATH, 'foo', 'utf8')
+// fs.createFile(NEW_FILE_PATH, [102, 111, 111], 'ascii')
+// fs.createFile(NEW_FILE_PATH, base64.encode('foo'), 'base64')
+// fs.createFile(PATH_TO_WRITE, PATH_TO_ANOTHER_FILE, 'uri')
+
+    console.log(RNFS.ExternalStorageDirectoryPath+ '/Awesome/aa.png')
+  }
+
+  // saveImages = () =>{
+  //   alert('eee')
+  //   CameraRoll.getPhotos({
+  //     first: 20,
+  //     assetType: 'Photos',
+  //   })
+  //   .then(r => {
+  //     this.setState({ photos: r.edges });
+  //   })
+  //   .catch((err) => {
+  //      //Error Loading Images
+  //      console.log('error',err)
+  //   });
+  // }
+  
+   render() {
     return (
       <View>
         <Button
         title = 'Toast Message'
         onPress = {this.showToast}/>
+
+<View style = {{backgroundColor :'pink'}}>
+<Image
+    style={{width:100, height:200}}
+    source={{uri: `file://` + RNFS.ExternalStorageDirectoryPath+ `/Awesome/aa.png`, scale:1}}
+/>
+</View>
+{/* <GoogleMap/> */}
       </View>
+      //<ReadFolder />
+      
     )
   }
 }
 
 export default App
-
